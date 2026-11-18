@@ -1,9 +1,11 @@
 #include <iostream>
 #include <filesystem>
+#include <sstream>
 #include <queue>  
 #include <deque>          // std::deque
 #include <list>
 #include <vector>
+#include <fstream>      // std::ifstream
 
 
 class Resources{
@@ -31,9 +33,15 @@ class Resources{
 
 
 struct Job{
-    int id;
+    std::string id;
     std::string name; 
     std::string type; 
+    std::string arrival;
+    std::string io; 
+    std::string cpu; 
+    std::string gpu;
+    std::string memory; 
+    std::string priority; 
 
 };
 
@@ -69,8 +77,56 @@ class System{
             std::cout << "System initiated successfully" << std::endl;
         }
 
+        std::ifstream ifs;
+        std::vector<std::string> holder;
 
 
+        
+        ifs.open(filepath, std::ifstream::in);
+        if (!ifs.is_open()) {
+            std::cout << "error opening file" << std::endl;
+            return; 
+        }
+
+        std::string buffer;
+        while (std::getline(ifs, buffer)) {
+            
+            if (buffer.empty() || buffer[0] == '#') {
+                continue;
+            }
+
+            
+            std::istringstream iss(buffer);
+            std::vector<std::string> holder; 
+            std::string holder1;
+
+            while (std::getline(iss, holder1, ' ')) {
+                
+                if (!holder1.empty()) {
+                    holder.push_back(holder1);
+                }
+            }
+
+            // Ensure the line had at least 3 fields before accessing them
+            if (holder.size() >= 9) {
+                Job j1;
+                j1.id = holder[0];
+                j1.name = holder[1];
+                j1.type = holder[2];
+                j1.arrival = holder[3];
+                j1.io = holder[4];
+                j1.cpu = holder[5];
+                j1.gpu = holder[6];
+                j1.memory = holder[7];
+                j1.priority = holder[8];
+
+                jobs.push_back(j1);
+                std::cout << "size: " << jobs.size() << std::endl;
+            }
+        }
+        
+
+        
 
     }
 
@@ -84,12 +140,21 @@ class FCFS : public System {
 
     public: 
     int num;
-    std::queue<int> jobs; 
+    std::queue<Job> jobsholder; 
 
     FCFS(){};
     FCFS(int value){
         num = value;
     };
+
+    void initiateFCFS(){
+
+        for(int x = 0; x < jobs.size(); x++){
+            jobsholder.push(jobs[x]);
+        }
+
+
+    }
 };
 
 
