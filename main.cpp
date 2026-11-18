@@ -8,15 +8,13 @@ namespace fs = std::filesystem;
 int main(int argc, char* argv[]) {
 
     Resources r1;
-    r1.checkresources();
+    //r1.checkresources();
 
-    System s1("C:/Users/HP/OneDrive/Documents/Profesional Developmement");
-    s1.initiatesystem(&s1);
+    System s1(R"(C:\Users\HP\Documents\Coding Files\OSproject\data\test.tx)");
+    s1.initiatesystem("C:\\Users\\HP\\OneDrive\\Documents\\Coding Files\\OSproject\\data\\test.txt");
 
-    if (argc < 2) {
-        std::cout << "Usage: program.exe <folder_path>\n";
-        return 1;
-    }
+    //FCFS f1;
+    //f1.initiatesystem(R"(C:\Users\HP\Documents\Coding Files\OSproject\data\test.txt)")
 
 
     /*

@@ -1,5 +1,9 @@
 #include <iostream>
 #include <filesystem>
+#include <queue>  
+#include <deque>          // std::deque
+#include <list>
+#include <vector>
 
 
 class Resources{
@@ -26,32 +30,67 @@ class Resources{
 
 
 
+struct Job{
+    int id;
+    std::string name; 
+    std::string type; 
+
+};
+
+
+
 class System{
 
     private:
-    std::string filepath;
+    std::string file_path;
+    std::vector<Job> jobs;
 
     public:
     System(){};
     System(std::string filePath){
-        filepath = filePath;
+        file_path = filePath;
     };
 
     ~System(){};
 
-    void initiatesystem(System* s1){
+    void initiatesystem(std::string filepath){
 
-        if(s1 == nullptr){
-            std::cout << "need a system to initiate" << std::endl;
+        if(filepath.empty()){
+            std::cout << "system needs a file to start" << std::endl;
             return;
         }
 
-        if (!std::filesystem::exists(s1->filepath) || !std::filesystem::is_directory(s1->filepath)) {
+        std::filesystem::path p1 = filepath; 
+
+        if (!std::filesystem::exists(p1) ) {
             std::cout << "Invalid directory no file path.\n";
             return;
         }else{
             std::cout << "System initiated successfully" << std::endl;
         }
+
+
+
+
     }
 
 };  
+
+
+
+
+class FCFS : public System {
+
+
+    public: 
+    int num;
+    std::queue<int> jobs; 
+
+    FCFS(){};
+    FCFS(int value){
+        num = value;
+    };
+};
+
+
+
