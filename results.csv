@@ -1,0 +1,4 @@
+workload,algorithm,avg_wait,avg_turnaround,avg_response,throughput,cpu_util,gpu_util,io_util,mem_util,total_time
+test.txt,FCFS,1.50,8.75,1.25,0.29,50.00,50.00,57.14,44.20,14
+test.txt,RR(q=4),1.50,8.75,1.25,0.29,50.00,50.00,57.14,44.20,14
+test.txt,Priority,1.25,8.50,0.50,0.33,58.33,58.33,66.67,48.44,12
