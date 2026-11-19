@@ -10,8 +10,15 @@ int main(int argc, char* argv[]) {
     Resources r1;
     //r1.checkresources();
 
-    System s1(R"(C:\Users\HP\Documents\Coding Files\OSproject\data\test.tx)");
-    s1.initiatesystem("C:\\Users\\HP\\OneDrive\\Documents\\Coding Files\\OSproject\\data\\test.txt");
+    //System s1(R"(C:\Users\HP\Documents\Coding Files\OSproject\data\test.tx)");
+    //s1.initiatesystem("C:\\Users\\HP\\OneDrive\\Documents\\Coding Files\\OSproject\\data\\test.txt");
+
+
+    FCFS f;
+    f.initiatesystem("C:\\Users\\HP\\OneDrive\\Documents\\Coding Files\\OSproject\\data\\test.txt");
+    f.initiateFCFS();
+    Resources res;
+    f.runFCFS(res);
 
     //FCFS f1;
     //f1.initiatesystem(R"(C:\Users\HP\Documents\Coding Files\OSproject\data\test.txt)")
